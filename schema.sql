@@ -11,7 +11,7 @@ create table profiles (
   avatar_url text
 );
 
--- profilesテーブルRLS指定
+-- profilesテーブルRLS指定（後程直すこと！）
 alter table profiles enable row level security;
 create policy "プロフィールは誰でも参照可能" on profiles for select using (true);
 create policy "プロフィールを更新" on profiles for update using (true);
@@ -53,3 +53,34 @@ create policy "自身のプロフィール画像を削除"
 on storage.objects
 for delete
 using ( bucket_id = 'profile' AND auth.uid() = owner );
+
+
+-- ---------------------
+-- ✅ TODO機能
+-- ---------------------
+
+create table todos (
+  id uuid primary key default gen_random_uuid(), -- 一意なID
+  user_id uuid references auth.users on delete cascade, -- ユーザーに紐づける
+  title text not null, -- タイトル（必須）
+  description text, -- 内容（任意）
+  status text check (status in ('not_started', 'in_progress', 'completed')) default 'not_started', -- 状態管理
+  due_date date, -- 締め切り日
+  created_at timestamp with time zone default timezone('utc', now()), -- 作成日時
+  updated_at timestamp with time zone default timezone('utc', now()) -- 更新日時
+);
+
+alter table todos enable row level security;
+
+-- 自分のTODOだけ参照・操作できるように
+create policy "自分のTODOを取得" on todos
+for select using (auth.uid() = user_id);
+
+create policy "自分のTODOを追加" on todos
+for insert with check (auth.uid() = user_id);
+
+create policy "自分のTODOを更新" on todos
+for update using (auth.uid() = user_id);
+
+create policy "自分のTODOを削除" on todos
+for delete using (auth.uid() = user_id);
