@@ -17,7 +17,11 @@ const schema = z.object({
 
 // サインインページ
 export default function Signin() {
+  // 処理中のローディング
   const [loading, setLoading] = useState(false);
+
+  // エラーメッセージ表示用
+  const [message, setMessage] = useState("");
 
   // react-hook-form連携
   const {
@@ -32,7 +36,12 @@ export default function Signin() {
   });
 
   // クリック送信
-  const onSubmit = async () => {};
+  const onSubmit = async () => {
+    try {
+    } catch {
+    } finally {
+    }
+  };
 
   return (
     <div className="max-w-[400px] mx-auto">
@@ -83,6 +92,9 @@ export default function Signin() {
       </form>
 
       {/* ログインできなかった時のエラー表示 */}
+      {message && (
+        <div className="y-5 text-center text-sm text-red-500">{message}</div>
+      )}
     </div>
   );
 }
