@@ -61,8 +61,8 @@ export const Navigation = ({
             </div>
           ) : (
             <div className="flex items-center space-x-5">
-              <Link href="/src/app/auth/signin">ログイン</Link>
-              <Link href="/src/app/auth/signup">サインアップ</Link>
+              <Link href="/auth/signin">ログイン</Link>
+              <Link href="/auth/signup">サインアップ</Link>
             </div>
           )}
         </div>

@@ -1,13 +1,13 @@
 // ログインページ実装
 // use client側の components/login の読み込み
 
-import Signin from "@/app/components/signin/page";
 import { createClient } from "@/app/utils/supabase/supabase-server";
 import type { Database } from "@/lib/database.types";
 import { redirect } from "next/navigation";
+import Signin from "@/app/components/signin/page";
 
 // 認証状態の監視
-export const signinPage = async () => {
+export default async function signinPage() {
   const supabase = await createClient<Database>();
 
   // セッションの取得
@@ -20,4 +20,4 @@ export const signinPage = async () => {
     redirect("/");
   }
   return <Signin />;
-};
+}

@@ -28,8 +28,8 @@ export async function signin(formData: FormData) {
 export async function signup(formData: FormData) {
   const supabase = await createClient();
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
+  // 便宜上、ここでは型アサーション（型キャスト）を使っています
+  // 実際には、入力値を検証（バリデーション）すべきです
   const data = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
