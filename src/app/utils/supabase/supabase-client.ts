@@ -1,4 +1,7 @@
 // クライアントサイト（ブラウザ）
+
+"use client";
+
 import { createBrowserClient } from "@supabase/ssr";
 
 export function createClient<Schema>() {

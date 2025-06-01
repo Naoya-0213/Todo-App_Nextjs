@@ -8,9 +8,10 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import LoadingSpinner from "../loading/loading";
-import { createClient } from "@/app/utils/supabase/supabase-server";
+import { createClient } from "@/app/utils/supabase/supabase-client";
 import type { Database } from "@/lib/database.types";
 import { useRouter } from "next/navigation";
+import Link from "next/link";
 
 // dataの型定義
 type FormData = {
@@ -25,11 +26,11 @@ const schema = z.object({
 });
 
 // サインインページ
-export default async function Signin() {
+export default function Signin() {
   const router = useRouter();
 
   // supabase連携（別ページにて連携済み）
-  const supabase = await createClient<Database>();
+  const supabase = createClient<Database>();
 
   // 処理中のローディング
   const [loading, setLoading] = useState(false);
@@ -125,6 +126,20 @@ export default async function Signin() {
       {message && (
         <div className="y-5 text-center text-sm text-red-500">{message}</div>
       )}
+
+      {/* パスワード忘れた時の挙動 */}
+      {/* <div className="text-center text-sm mb-5">
+        <Link href="/auth/reset-password" className="text-gray-500 font-bold">
+          パスワードを忘れた方はこちら
+        </Link>
+      </div> */}
+
+      {/* サインアップ用のリンク */}
+      {/* <div className="text-center text-sm mb-5">
+        <Link href="/auth/signup" className="text-gray-500 font-bold">
+          アカウントを作成する
+        </Link>
+      </div> */}
     </div>
   );
 }
