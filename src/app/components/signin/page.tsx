@@ -8,6 +8,15 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import LoadingSpinner from "../loading/loading";
+import { createClient } from "@/app/utils/supabase/supabase-server";
+import type { Database } from "@/lib/database.types";
+import { useRouter } from "next/navigation";
+
+// dataの型定義
+type FormData = {
+  email: string;
+  password: string;
+};
 
 // zodの指定　入力データの検証およびバリデーション
 const schema = z.object({
@@ -16,7 +25,12 @@ const schema = z.object({
 });
 
 // サインインページ
-export default function Signin() {
+export default async function Signin() {
+  const router = useRouter();
+
+  // supabase連携（別ページにて連携済み）
+  const supabase = await createClient<Database>();
+
   // 処理中のローディング
   const [loading, setLoading] = useState(false);
 
@@ -36,10 +50,26 @@ export default function Signin() {
   });
 
   // クリック送信
-  const onSubmit = async () => {
+  const onSubmit = async (data: FormData) => {
     try {
-    } catch {
+      // react-hook-formで受け取ったdata(email,password)をsupabaseへ渡す
+      // error は supabase側からのエラー情報（messageがついてくるため、それを下記で表示）
+      const { error } = await supabase.auth.signInWithPassword({
+        email: data.email,
+        password: data.password,
+      });
+
+      // エラーチェック
+      if (error) {
+        setMessage(`ログインに失敗しました:${error.message}`);
+        return;
+      }
+    } catch (error) {
+      setMessage("エラーが発生しました");
+      return;
     } finally {
+      setLoading(false);
+      router.refresh();
     }
   };
 
