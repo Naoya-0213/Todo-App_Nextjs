@@ -4,12 +4,13 @@ import { revalidatePath } from "next/cache";
 import { redirect } from "next/navigation";
 
 import { createClient } from "@/app/utils/supabase/supabase-server";
+import type { Database } from "@/lib/database.types";
 
 export async function signin(formData: FormData) {
-  const supabase = await createClient();
+  const supabase = await createClient<Database>();
 
-  // type-casting here for convenience
-  // in practice, you should validate your inputs
+  // 便宜上、ここでは型アサーション（型キャスト）を使っています
+  // 実際には、入力値を検証（バリデーション）すべきです
   const data = {
     email: formData.get("email") as string,
     password: formData.get("password") as string,
