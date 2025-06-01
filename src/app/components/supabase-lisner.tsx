@@ -1,4 +1,5 @@
-// supabaseからの情報取得用、ナビゲーションに渡す
+// １）supabaseからの情報取得用、ナビゲーションに渡す
+// ２）全体layout.tsxで表示。
 
 "use server";
 

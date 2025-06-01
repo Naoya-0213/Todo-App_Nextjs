@@ -1,3 +1,6 @@
+// TODOリスト上のナビゲーション実装
+// タイトルとプロフィールの実装
+
 "use client";
 
 import Link from "next/link";
