@@ -4,7 +4,7 @@
 "use server";
 
 import { Database } from "../../lib/database.types";
-import { Navigation } from "./navigation";
+import { Navigation } from "./navigation/navigation";
 import { createClient } from "../utils/supabase/supabase-server";
 
 // 認証状態の監視

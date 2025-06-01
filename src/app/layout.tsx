@@ -33,12 +33,13 @@ export default function RootLayout({
   return (
     <html lang="jp">
       <body className={inter.className}>
-        <SupabaseLisner />
         {/* Navigationの表示（componets/Navigation.tsx は "use client"のため、直接呼べない！*/}
+        <SupabaseLisner />
 
-        <main>{children}</main>
         {/* mainの内容表示（全体paga.tsxのreturn内容表示 */}
+        <main>{children}</main>
 
+        {/* footer表示 */}
         <footer className="py-5">
           <div className="text-center text-sm">
             Copyright © All rights reserved | Naoya's Practice
