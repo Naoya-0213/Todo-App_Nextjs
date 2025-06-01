@@ -12,6 +12,7 @@ export default async function Home() {
 
   return (
     <div className="text-center text-xl">
+      {/* ここにTODOリスト作成予定！ */}
       {session ? <div>ログイン済</div> : <div>未ログイン</div>}
     </div>
   );
