@@ -1,3 +1,5 @@
+// サインインページのサーバー側の処理
+
 "use server";
 
 import { revalidatePath } from "next/cache";
@@ -6,6 +8,7 @@ import { redirect } from "next/navigation";
 import { createClient } from "@/app/utils/supabase/supabase-server";
 import type { Database } from "@/lib/database.types";
 
+// サインイン
 export async function signin(formData: FormData) {
   const supabase = await createClient<Database>();
 
@@ -26,6 +29,7 @@ export async function signin(formData: FormData) {
   redirect("/");
 }
 
+// サインアップ
 export async function signup(formData: FormData) {
   const supabase = await createClient();
 

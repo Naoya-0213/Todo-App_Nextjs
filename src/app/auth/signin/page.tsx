@@ -19,5 +19,6 @@ export default async function signinPage() {
   if (session) {
     redirect("/");
   }
+
   return <Signin />;
 }
