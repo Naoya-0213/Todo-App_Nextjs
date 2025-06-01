@@ -9,7 +9,64 @@ export type Json =
 export type Database = {
   public: {
     Tables: {
-      TODO: {
+      profiles: {
+        Row: {
+          avatar_url: string | null
+          email: string
+          id: string
+          introduce: string | null
+          name: string | null
+        }
+        Insert: {
+          avatar_url?: string | null
+          email: string
+          id: string
+          introduce?: string | null
+          name?: string | null
+        }
+        Update: {
+          avatar_url?: string | null
+          email?: string
+          id?: string
+          introduce?: string | null
+          name?: string | null
+        }
+        Relationships: []
+      }
+      todos: {
+        Row: {
+          created_at: string | null
+          description: string | null
+          due_date: string | null
+          id: string
+          status: string | null
+          title: string
+          updated_at: string | null
+          user_id: string | null
+        }
+        Insert: {
+          created_at?: string | null
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          status?: string | null
+          title: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Update: {
+          created_at?: string | null
+          description?: string | null
+          due_date?: string | null
+          id?: string
+          status?: string | null
+          title?: string
+          updated_at?: string | null
+          user_id?: string | null
+        }
+        Relationships: []
+      }
+      TODOリスト: {
         Row: {
           created_at: string
           id: number
