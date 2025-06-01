@@ -3,6 +3,9 @@
 import { signin, signup } from "./action";
 import ErrorPage from "../../error/page";
 import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 
 // zodの指定　入力データの検証およびバリデーション
 const schema = z.object({
@@ -13,6 +16,16 @@ const schema = z.object({
 // サインインページ
 export default function Signin() {
   // react-hook-form連携
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
+    // 初期値
+    defaultValues: { email: "", password: "" },
+    // バリデーション（zod連携）
+    resolver: zodResolver(schema),
+  });
 
   return (
     <div>
