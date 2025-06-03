@@ -52,6 +52,8 @@ export default function Signin() {
 
   // クリック送信
   const onSubmit = async (data: FormData) => {
+    setLoading(true);
+
     try {
       // react-hook-formで受け取ったdata(email,password)をsupabaseへ渡す
       // error は supabase側からのエラー情報（messageがついてくるため、それを下記で表示）
