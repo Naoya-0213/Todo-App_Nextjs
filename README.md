@@ -4,3 +4,4 @@
 ・Next.js
 ・Supabase
 
+25.6〜
