@@ -1,14 +1,8 @@
-import { createClient } from "@/app/utils/supabase/supabase-server";
-import { Database } from "@/lib/database.types";
+import getSession from "./components/auth/getSession";
 
 // メインページ
 export default async function Home() {
-  const supabase = await createClient<Database>();
-
-  // セッションに取得
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
+  const session = await getSession();
 
   return (
     <div className="text-center text-xl">
