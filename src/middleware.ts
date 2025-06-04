@@ -17,6 +17,6 @@ export const config = {
      *
      * 必要に応じて、他にも除外したいパスがあればここに追加してOKです。
      */
-    "/((?!_next/static|_next/image|favicon.ico|.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
+    "/((?!_next/static|_next/image|favicon.ico.*\\.(?:svg|png|jpg|jpeg|gif|webp)$).*)",
   ],
 };
