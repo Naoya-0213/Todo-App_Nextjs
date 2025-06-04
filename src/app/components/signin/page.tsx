@@ -4,7 +4,7 @@
 import { signin, signup } from "./action";
 import ErrorPage from "../../error/page";
 import { z } from "zod";
-import { useForm } from "react-hook-form";
+import { useForm, type SubmitHandler } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
 import LoadingSpinner from "../loading/loading";
@@ -13,11 +13,8 @@ import type { Database } from "@/lib/database.types";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 
-// dataの型定義
-type FormData = {
-  email: string;
-  password: string;
-};
+// Zod＆React hook form で使用！
+type Schema = z.infer<typeof schema>;
 
 // zodの指定　入力データの検証およびバリデーション
 const schema = z.object({
@@ -51,7 +48,8 @@ export default function Signin() {
   });
 
   // クリック送信
-  const onSubmit = async (data: FormData) => {
+  // SubmitHandler<Schema>：Zod＆React hook form で使用！
+  const onSubmit: SubmitHandler<Schema> = async (data) => {
     setLoading(true);
 
     try {
