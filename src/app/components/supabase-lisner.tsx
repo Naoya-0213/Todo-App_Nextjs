@@ -3,13 +3,12 @@
 
 "use server";
 
-import { Database } from "../../lib/database.types";
 import { Navigation } from "./navigation/navigation";
-import { createClient } from "../utils/supabase/supabase-server";
+import getSession from "./auth/getSession";
 
 // 認証状態の監視
 export const SupabaseLisner = async () => {
-  const supabase = await createClient<Database>();
+  const { supabase } = await getSession();
 
   // セッションの取得
   const {

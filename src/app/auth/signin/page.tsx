@@ -5,10 +5,11 @@ import { createClient } from "@/app/utils/supabase/supabase-server";
 import type { Database } from "@/lib/database.types";
 import { redirect } from "next/navigation";
 import Signin from "@/app/components/signin/page";
+import getSession from "@/app/components/auth/getSession";
 
 // 認証状態の監視
 export default async function signinPage() {
-  const supabase = await createClient<Database>();
+  const { supabase } = await getSession();
 
   // セッションの取得
   const {
